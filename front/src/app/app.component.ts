@@ -2,9 +2,16 @@ import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  template: `
+
+    <button (click)="addHero()">Add</button>
+
+    <ul><li *ngFor="let hero of heroes">{{hero}}</li></ul>
+  `
 })
-export class AppComponent {
-  title = 'front';
+export class LittleTourComponent {
+  heroes = [''];
+  addHero() {
+    this.heroes.push('value from backend');
+  }
 }
