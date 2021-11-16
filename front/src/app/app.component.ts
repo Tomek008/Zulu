@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { HttpServiceService } from './http-service.service';
 
 @Component({
   selector: 'app-root',
@@ -10,8 +11,14 @@ import { Component } from '@angular/core';
   `
 })
 export class LittleTourComponent {
+
+  constructor(private httpService: HttpServiceService) { }
+  posts : any;
   heroes = [''];
   addHero() {
-    this.heroes.push('value from backend');
+    this.httpService.getPost().subscribe(
+      (response) => { this.posts = JSON.stringify(response); },
+      (error) => { console.log(error); });;
+    this.heroes.push(this.posts);
   }
 }
