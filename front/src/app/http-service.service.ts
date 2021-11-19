@@ -6,7 +6,7 @@ import { HttpClient } from '@angular/common/http';
 })
 export class HttpServiceService {
 
-  private url = 'http://localhost:3002'
+  private url = 'http://localhost:3000'
 
   constructor(private http: HttpClient) { }
 
