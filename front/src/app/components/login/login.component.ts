@@ -32,7 +32,4 @@ export class LoginComponent implements OnInit {
       map(token => this.router.navigate(['profile']))).subscribe();
       console.log(this.loginForm.value);
   }
-  login(){
-    //this.authService.login('user', 'pass').subscribe(data => console.log('SUCCESS'));
-  }
 }
