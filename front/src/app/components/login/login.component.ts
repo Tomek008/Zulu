@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthenticationService } from 'src/app/services/authentication.service';
+import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-login',
@@ -8,12 +11,28 @@ import { AuthenticationService } from 'src/app/services/authentication.service';
 })
 export class LoginComponent implements OnInit {
 
-  constructor(private authService: AuthenticationService) { }
+  loginForm: FormGroup;
+
+  constructor(private formBuilder: FormBuilder,
+		private route: ActivatedRoute, private authService: AuthenticationService, private router: Router) {this.loginForm = new FormGroup({
+      username: new FormControl(null, [Validators.required, Validators.minLength(3)]),
+      password: new FormControl(null, [Validators.required, Validators.minLength(3)])
+    }) }
 
   ngOnInit(): void {
+    
   }
 
+  onSubmit() {
+    if(this.loginForm.invalid)
+    {
+      return;
+    }
+    this.authService.login(this.loginForm.value).pipe(
+      map(token => this.router.navigate(['profile']))).subscribe();
+      console.log(this.loginForm.value);
+  }
   login(){
-    this.authService.login('user', 'pass').subscribe(data => console.log('SUCCESS'));
+    //this.authService.login('user', 'pass').subscribe(data => console.log('SUCCESS'));
   }
 }
