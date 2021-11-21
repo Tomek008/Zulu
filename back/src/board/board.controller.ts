@@ -22,7 +22,7 @@ export class BoardController {
     }
 
     @Put(':id')
-    update(@Param('id') id: number, @Param('id') user, @Body() body: Partial<BoardDto>){
+    update(@Param('id') id: string, @Param('id') user, @Body() body: Partial<BoardDto>){
         return this.boardService.update(id, user, body);
     }
 

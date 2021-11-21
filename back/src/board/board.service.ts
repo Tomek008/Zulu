@@ -1,14 +1,11 @@
 import { HttpException, HttpStatus, Injectable, Logger } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
 import { BoardDto, BoardRo } from './board.dto';
 import { Board } from './board.entity';
 import { User } from 'src/users/users.entity';
 import { BoardRepository } from './board.repository';
+
 @Injectable()
 export class BoardService {
-  
-    
     constructor(
         private boardRepository: BoardRepository
     ){}
@@ -24,7 +21,7 @@ export class BoardService {
     }
     async showAll(id: number) : Promise<BoardRo[]> {
         const boards = await this.boardRepository.find({
-            relations: ['author']
+            relations: ['author', 'lists']
         });
         return this.getResponse(boards)
     }
@@ -53,7 +50,7 @@ export class BoardService {
           return response
     }
 
-    async update(id: number, user: any, body: Partial<BoardDto>) {
+    async update(id: string, user: any, body: Partial<BoardDto>) {
         let board = await this.boardRepository.findOne({
             where: {id},
             relations: ['author']
