@@ -1,0 +1,33 @@
+.example-icon {
+    padding: 0 14px;
+  }
+  
+  .example-spacer {
+    flex: 1 1 auto;
+  }
+  
+  .home-link:hover {
+    cursor: pointer;
+  }
+
+  a {
+      color: lightsalmon;
+      justify-content: start;
+  }
+  span {
+    margin-left: 15px;
+}
+  div {
+    margin-left: 75%;
+    
+  }
+  h1 {
+    font-weight: bold;
+    color: lightskyblue;
+    font-size: larger;
+    margin-left: 5%;
+
+  }
+  a:link {
+    text-decoration: none;
+  }
