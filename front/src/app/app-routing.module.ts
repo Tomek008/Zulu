@@ -17,9 +17,11 @@ const routes: Routes = [
     path: 'profile',
     component: ProfileComponent
   },
+  //if user provides a wrong path (f.ex localhost:4200/saaewgas) it will take him to login page.
   {path: '**', 
   redirectTo: '/login', 
-  pathMatch: 'full'},
+  pathMatch: 'full'
+  },
 ];
 
 @NgModule({
