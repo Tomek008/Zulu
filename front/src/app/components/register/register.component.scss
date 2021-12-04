@@ -1,0 +1,45 @@
+div{
+    height:100vh;
+    width: 100%;
+    background: lightblue;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+  }
+  ::ng-deep .mat-form-field {
+    .mat-input-element {
+        color: rgb(8, 26, 26);
+    }
+    .mat-form-field-label {
+        color: slategray;
+    }
+    .mat-form-field-underline {
+        background-color: purple;
+    }
+    .mat-form-field-ripple {
+        background-color: slategray;
+    }
+    .mat-form-field-required-marker {
+        color: red;
+    }
+}
+.container {
+    display: flex;
+    height:100vh;
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-left: auto;
+  margin-right: auto;
+}
+
+.container > * {
+    width: 40%;
+}
+
+h1 {
+  color: purple;
+  font-size: 33px;
+}

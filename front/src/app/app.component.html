@@ -3,7 +3,7 @@
       <mat-toolbar-row>
           
         <h1>TRELLO</h1>
-        <div>
+        <div *ngIf="_router.url == '/login' || _router.url == '/register' || _router.url == '/'">
         <a routerLink="/login">Login</a>
         <span></span>
         <a routerLink="/register">Register</a>

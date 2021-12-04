@@ -1,0 +1,43 @@
+<div class="root">
+  
+    <div class="board">
+      <div class="board-bar">
+        <p class="board-name" *ngIf="nameChanged == true; else elseBlock">{{ namess }}</p>
+        <ng-template #elseBlock><p class="board-name">{{ board.name }}</p></ng-template>
+        <p class="board-name" *ngIf="nameChanged == false">{{ board.name }}</p>
+        <span></span><button mat-raised-button color="primary" class="mat-but" (click)="edit = !edit; str = board.name">&#9998;</button>
+        <span></span>
+        <div class="board-name-change" [hidden]="!edit">
+        Enter new board name <input type="text" [(ngModel)]="str"> <span></span>
+            <button mat-raised-button color="primary" type="submit" (click)="changeLabelName()" id="bt">
+                Save
+            </button>
+      </div>
+      </div>
+     
+      <div class="board-wrapper">
+  
+        <div class="board-columns" cdkDropListGroup>
+          <div class="board-column" *ngFor="let column of board.columns">
+  
+            <div class="column-title">
+              {{ column.name }}
+            </div>
+  
+            <div class="tasks-container"
+            cdkDropList
+            [cdkDropListData]="column.tasks"
+            (cdkDropListDropped)="drop($event)">
+              <div class="task" *ngFor="let item of column.tasks" cdkDrag>
+                {{ item }}
+              </div>
+            </div>
+          </div>
+  
+        </div>
+  
+      </div>
+  
+    </div>
+  
+  </div>
