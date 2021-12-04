@@ -13,15 +13,17 @@ import {MatFormFieldModule} from '@angular/material/form-field'
 import {MatInputModule} from '@angular/material/input'
 import {MatButtonModule} from '@angular/material/button'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { ProfileComponent } from './components/profile/profile.component';
+import { BoardComponent } from './components/board/board.component';
 
 import { DragDropModule} from '@angular/cdk/drag-drop';
+import { OverviewComponent } from './overview/overview.component';
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     RegisterComponent,
-    ProfileComponent
+    BoardComponent,
+    OverviewComponent
   ],
   imports: [
     BrowserModule,

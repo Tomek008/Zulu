@@ -5,10 +5,10 @@ import { Column } from 'src/app/models/column.model';
 
 @Component({
   selector: 'app-profile',
-  templateUrl: './profile.component.html',
-  styleUrls: ['./profile.component.scss']
+  templateUrl: './board.component.html',
+  styleUrls: ['./board.component.scss']
 })
-export class ProfileComponent implements OnInit {
+export class BoardComponent implements OnInit {
 
   constructor() { }
 
