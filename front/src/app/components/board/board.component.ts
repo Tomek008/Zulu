@@ -44,7 +44,7 @@ export class BoardComponent implements OnInit {
         event.currentIndex);
     }
   }
-  changeLabelName() {
+  changeBoardName() {
     this.namess = this.str;
     this.board.name = this.str;
     this.nameChanged = true;
@@ -52,5 +52,8 @@ export class BoardComponent implements OnInit {
     // TUTAJ DODAĆ REQUEST DO BACKENDU NA ZMIANĘ NAZWY TABLICY W BAZIE
   }  
 
-  
+  removeColumn(i:any) {
+    this.board.columns.splice(i,1);
+  }
+
 }

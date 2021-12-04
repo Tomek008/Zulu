@@ -9,19 +9,26 @@
         <span></span>
         <div class="board-name-change" [hidden]="!edit">
         Enter new board name <input type="text" [(ngModel)]="str"> <span></span>
-            <button mat-raised-button color="primary" type="submit" (click)="changeLabelName()" id="bt">
+            <button mat-raised-button color="primary" type="submit" (click)="changeBoardName()" id="bt">
                 Save
             </button>
       </div>
+      <span></span>
+      <div><button mat-raised-button color="primary" [routerLink]="'/overview'">All boards</button></div>
+      
       </div>
      
       <div class="board-wrapper">
-  
+        
         <div class="board-columns" cdkDropListGroup>
-          <div class="board-column" *ngFor="let column of board.columns">
-  
+          
+          <div class="board-column" *ngFor="let column of board.columns, let i = index">
+            
             <div class="column-title">
               {{ column.name }}
+              <button mat-raised-button color="primary" type="submit" (click)="removeColumn(i)" id="bt">
+                remove
+            </button>
             </div>
   
             <div class="tasks-container"
