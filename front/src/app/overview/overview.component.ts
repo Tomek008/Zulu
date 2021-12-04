@@ -13,5 +13,9 @@ export class OverviewComponent implements OnInit {
   boardnames = BOARDNAMES;
   ngOnInit(): void {
   }
-
+  addNewBoard() {
+    //TUTAJ WYSŁAĆ REQUEST DO BACKENDU O DODANIE NOWEJ TABLICY
+    
+    window.location.reload();
+  }
 }
