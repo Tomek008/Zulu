@@ -2,11 +2,9 @@
 <h1>Available Boards</h1>
 <nav>
   <ul>
-        <li *ngFor="let boardname of boardnames, let i = index">
+        <li *ngFor="let boardname of boardnames">
             <br>
-            <button mat-raised-button color="primary" [routerLink]="'/board'">{{boardname.name}}</button><span>        </span>
-            <input type="text" #title [hidden]="!edit1"/>
-            <button (click)="changeEdit({i})">{{ edit1 == true ? 'Save' : 'Edit' }}</button>
+            <button mat-raised-button color="primary" [routerLink]="'/board'">{{boardname.name}}</button><span></span>
             <br>
             
         </li>

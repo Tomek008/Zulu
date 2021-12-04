@@ -46,9 +46,9 @@ export class BoardComponent implements OnInit {
   }
   changeLabelName() {
     this.namess = this.str;
+    this.board.name = this.str;
     this.nameChanged = true;
     this.edit = false;
-
     // TUTAJ DODAĆ REQUEST DO BACKENDU NA ZMIANĘ NAZWY TABLICY W BAZIE
   }  
 

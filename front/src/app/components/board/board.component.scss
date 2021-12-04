@@ -27,11 +27,12 @@
     .board-bar {
         background: rgba(gray, 0.5);
         padding: 8px 15px;
-    
+        display: flex;
         .board-name {
             font-size: 20px;
             font-weight: bold;
             color: white;
+            padding-top: 3px;
         }
     }
 
@@ -111,4 +112,18 @@
 
 .tasks-container.cdk-drop-list-dragging .task:not(.cdk-drag-placeholder) {
     transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+.mat-but{
+    min-width: unset!important;
+    min-height: unset!important;
+    padding: 0px;
+    width: 20px;
+    height: 40px;
+    font-family:Wingdings; 
+    transform: rotateZ(90deg);
+}
+
+span {
+    margin-left: 20px;
 }
