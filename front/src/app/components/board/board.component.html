@@ -3,9 +3,20 @@
     <div class="board">
 
       <div class="board-bar">
-        <p class="board-name">{{ board.name }}</p>
+        <p class="board-name" *ngIf="nameChanged == true; else elseBlock">{{ namess }}</p>
+        <ng-template #elseBlock><p class="board-name">{{ board.name }}</p></ng-template>
+        <p class="board-name" *ngIf="nameChanged == false">{{ board.name }}</p>
+        <button style="font-family:Wingdings; display: inline-block; transform: rotateZ(90deg);" (click)="edit = !edit">&#9998;</button>
+        <div class="board-name-change" [hidden]="!edit">
+        Enter a value <input type="text" [(ngModel)]="str">
+        <p>
+            <button type="submit" (click)="changeLabelName()" id="bt">
+                Click Me
+            </button>
+        </p>
       </div>
-  
+      </div>
+     
       <div class="board-wrapper">
   
         <div class="board-columns" cdkDropListGroup>

@@ -29,7 +29,7 @@ export class LoginComponent implements OnInit {
       return;
     }
     this.authService.login(this.loginForm.value).pipe(
-      map(token => this.router.navigate(['profile']))).subscribe();
+      map(token => this.router.navigate(['board']))).subscribe();
       console.log(this.loginForm.value);
   }
 }

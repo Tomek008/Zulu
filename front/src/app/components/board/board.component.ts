@@ -11,7 +11,10 @@ import { Column } from 'src/app/models/column.model';
 export class BoardComponent implements OnInit {
 
   constructor() { }
-
+  public namess:any;
+  public str:any;
+  public nameChanged:any;
+  edit = false;
   board: Board = new Board('Nazwa Tablicy', [
     new Column('To Do', [
       "Wyświetlanie tablic",
@@ -41,6 +44,13 @@ export class BoardComponent implements OnInit {
         event.currentIndex);
     }
   }
+  changeLabelName() {
+    this.namess = this.str;
+    this.nameChanged = true;
+    this.edit = false;
 
+    // TUTAJ DODAĆ REQUEST DO BACKENDU NA ZMIANĘ NAZWY TABLICY W BAZIE
+  }  
 
+  
 }
