@@ -1,7 +1,6 @@
 import { List } from "src/list/list.entity";
-import { User } from "src/users/users.entity";
 import { Column, Entity, JoinTable, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
-
+import { User } from "src/auth/user.entity";
 @Entity('board')
 export class Board{
     @PrimaryGeneratedColumn('uuid')

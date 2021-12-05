@@ -1,9 +1,8 @@
 import { HttpException, HttpStatus, Injectable, Logger } from '@nestjs/common';
 import { BoardDto, BoardRo } from './board.dto';
 import { Board } from './board.entity';
-import { User } from 'src/users/users.entity';
 import { BoardRepository } from './board.repository';
-
+import { User } from 'src/auth/user.entity';
 @Injectable()
 export class BoardService {
     constructor(
@@ -30,6 +29,7 @@ export class BoardService {
         const user = new User()
         user.login = 'testlogin';
         user.password = 'testpassword';
+        user.email = "sda";
         const board = await this.boardRepository.create({... body, author: user})
         await this.boardRepository.save(board);
         const response: any = {...board};

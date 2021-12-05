@@ -1,5 +1,6 @@
+import { UserDto } from "src/auth/user.dto";
 import { List } from "src/list/list.entity";
-import { UserDto } from "src/users/users.dto";
+
 export class BoardDto{
     readonly name: string;
 }

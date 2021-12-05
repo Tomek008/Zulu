@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Logger, Param, Post, Put } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Logger, Param, Post, Put, Query } from '@nestjs/common';
 import { BoardService } from './board.service';
 import { BoardDto } from './board.dto';
 @Controller('api/board')
@@ -10,9 +10,8 @@ export class BoardController {
         return this.boardService.showAll(user);
     }
 
-    @Post()
-    async create(@Param('id') user, @Body() body: BoardDto){
-        Logger.log(body)
+    @Post('')
+    async create(@Query() user, @Body() body: BoardDto){
         return this.boardService.create(user, body);
     }
 
