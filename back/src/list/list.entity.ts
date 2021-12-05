@@ -1,5 +1,5 @@
 import { Board } from "src/board/board.entity";
-import { User } from "src/users/users.entity";
+import { User } from "src/auth/users.entity";
 import { Column, Entity, JoinTable, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()
