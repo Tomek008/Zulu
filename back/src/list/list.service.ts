@@ -3,19 +3,12 @@ import { BoardRepository } from 'src/board/board.repository';
 import { ListDto } from './list.dto';
 import { ListRepository } from './list.repository';
 import { List } from './list.entity';
+import { UserRepository } from 'src/auth/user.repository';
 @Injectable()
 export class ListService {
     constructor(private listRepository: ListRepository,
-        private boardRepository: BoardRepository){}
-
-    private getResponse(lists: List[]): any[]{
-        const response: any[] = [];
-        lists.forEach( (element) => {
-            response.push({element})
-        });
-
-        return response
-    }
+        private boardRepository: BoardRepository,
+        private userRepository: UserRepository){}
 
     async delete(id: any) {
         const list = await this.listRepository.findOne({
@@ -33,7 +26,7 @@ export class ListService {
     async update(id: any, body: ListDto) {
         let list = await this.listRepository.findOne({
             where: {id},
-            relations: ['board']
+            relations: ['board', 'author']
         })
         if( !list){
             throw new HttpException('List not found', HttpStatus.NOT_FOUND);
@@ -41,18 +34,28 @@ export class ListService {
         await this.listRepository.update({ id }, body)
         list = await this.listRepository.findOne({
             where: {id},
-            relations: ['board']
+            relations: ['board', 'author']
         })
 
         const response: any = {...list};
         return response
     }
 
-    async addList(boardId: any, body: ListDto) {
+    async addList(userId: any, boardId: any, body: ListDto) {
         const board = await this.boardRepository.findOne({where: {id: boardId.id }});
+        if(! board){
+            throw new HttpException('Board not found', HttpStatus.NOT_FOUND);
+
+        }
+        const author = await this.userRepository.findOne({where: {id: userId}})
+        if(!author){
+            throw new HttpException('Author not found', HttpStatus.NOT_FOUND);
+
+        }
         const list = await this.listRepository.create({
             ...body,
-            board
+            board,
+            author: author
         });
         await this.listRepository.save(list);
         const response: any = {... list}
@@ -64,7 +67,7 @@ export class ListService {
         const id = listId.id
         const list = await this.listRepository.findOne({
             where: {id},
-            relations: ['board']
+            relations: ['board', 'author']
         });
         if(!list){
             throw new HttpException('List not found', HttpStatus.NOT_FOUND)
@@ -76,9 +79,10 @@ export class ListService {
     async getListByBoardId(boardId: number) {
         const lists = await this.listRepository.find({
             where: {board: {id: boardId}},
-            relations: ['board']
+            relations: ['board', 'author']
         });
         
-        return this.getResponse(lists)
+        const response: any = {... lists}
+        return response;
     }
 }

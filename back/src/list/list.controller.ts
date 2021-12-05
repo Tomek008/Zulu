@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, Put, Query } from '@nestjs/common';
 import { ListDto } from './list.dto';
 import { ListService } from './list.service';
 
@@ -18,8 +18,8 @@ export class ListController {
     }
 
     @Post(':id')
-    async addList(@Param() boardId, @Body() body: ListDto){
-        return this.listService.addList(boardId, body)
+    async addList(@Query('userId') userId, @Param() id, @Body() body: ListDto){
+        return this.listService.addList(userId, id, body)
     }
 
     @Put(':id')
