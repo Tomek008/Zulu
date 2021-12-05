@@ -17,13 +17,17 @@ import { BoardComponent } from './components/board/board.component';
 
 import { DragDropModule} from '@angular/cdk/drag-drop';
 import { OverviewComponent } from './overview/overview.component';
+import { ListComponent } from './list/list.component';
+import { MatCardModule } from '@angular/material/card';
+
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     RegisterComponent,
     BoardComponent,
-    OverviewComponent
+    OverviewComponent,
+    ListComponent
   ],
   imports: [
     BrowserModule,
@@ -36,7 +40,8 @@ import { OverviewComponent } from './overview/overview.component';
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    MatCardModule
   ],
   providers: [ 
     HttpClientModule

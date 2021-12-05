@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 import { Board } from 'src/app/models/board.model';
 import { Column } from 'src/app/models/column.model';
+import { ListComponent } from 'src/app/list/list.component';
 
 @Component({
   selector: 'app-profile',
@@ -10,6 +11,7 @@ import { Column } from 'src/app/models/column.model';
 })
 export class BoardComponent implements OnInit {
 
+  public lists : ListComponent[] = []
   constructor() { }
   public namess:any;
   public str:any;
@@ -54,6 +56,12 @@ export class BoardComponent implements OnInit {
 
   removeColumn(i:any) {
     this.board.columns.splice(i,1);
+  }
+
+  addList() {
+    var newList = new ListComponent(this);  
+    this.lists.push(newList);
+    ListComponent.list.push(newList);
   }
 
 }
