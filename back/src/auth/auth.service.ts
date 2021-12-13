@@ -1,15 +1,18 @@
 import { HttpException, HttpStatus, Injectable, Logger } from '@nestjs/common';
-import { UsersService } from '../users/users.service';
+import { User, UsersService } from '../users/users.service';
 import { JwtService } from '@nestjs/jwt';
 import { ForgotPassword, UserDto } from './user.dto';
 import { LoginDto } from './login.dto';
 import { UserRepository } from './user.repository';
+import * as jwt from 'jsonwebtoken';
+import { SecretConfiguration } from 'src/config/auth.config';
+
 @Injectable()
 export class AuthService {
   constructor(
     private usersService: UsersService,
     private jwtService: JwtService,
-    private userRepository: UserRepository
+    private userRepository: UserRepository,
   ) {}
 
   async validateUser(username: string, pass: string): Promise<any> {
@@ -39,11 +42,11 @@ export class AuthService {
     if (! user) {
       throw new HttpException('User not exists', HttpStatus.BAD_REQUEST);
     }
-
     if(user.password != data.password){
       throw new HttpException('Password is invalid', HttpStatus.BAD_REQUEST);
     }
-    const response: any = {...user};
+    Logger.log(this.create_token(user))
+    const response: any = {"token": this.create_token(user)};
     return response;
   }
 
@@ -56,6 +59,19 @@ export class AuthService {
     await this.userRepository.update({id}, {password: data.newPassword})
     const response: any = {...user};
     return response;
+  }
+
+  private create_token(user: User): string{
+    const id = user.id;
+    const username = user.username;
+    return jwt.sign(
+      {
+        id,
+        username,
+      },
+      SecretConfiguration.secret,
+      { expiresIn: '7d' },
+    ); 
   }
 
 }
