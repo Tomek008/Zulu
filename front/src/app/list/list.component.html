@@ -1,7 +1,7 @@
 <div class="container">
     <div class="container">
         <div class="list-name" contenteditable="true">New list</div>
-        <div class="button" (click)="delete(this.id);">Delete List</div>
+        <div class="button" (click)="delete();">Delete List</div>
     </div>
     <div class="list" cdkDropList [cdkDropListData]="items" (cdkDropListDropped)="drop($event)">
         <mat-card class="list-item" *ngFor="let item of items" cdkDrag>

@@ -11,12 +11,14 @@ import { ListComponent } from 'src/app/list/list.component';
 })
 export class BoardComponent implements OnInit {
 
-  public lists : ListComponent[] = []
-  constructor() { }
+  public lists : number[] = []
+  public counter : number = 0;
+  public list : ListComponent[] = [];
   public namess:any;
   public str:any;
   public nameChanged:any;
   edit = false;
+
   board: Board = new Board('Nazwa Tablicy', [
     new Column('To Do', [
       "Wyświetlanie tablic",
@@ -32,6 +34,10 @@ export class BoardComponent implements OnInit {
     new Column('Done', [
     ])
   ]);
+
+  constructor() {
+
+  }
 
   ngOnInit() {
   }
@@ -58,10 +64,18 @@ export class BoardComponent implements OnInit {
     this.board.columns.splice(i,1);
   }
 
-  addList() {
-    var newList = new ListComponent(this);  
-    this.lists.push(newList);
-    ListComponent.list.push(newList);
+  addList() {  
+    this.lists.push(this.counter);
+    this.counter++;
+  }
+
+  deleteList(toDelete:ListComponent){
+    const index = this.list.indexOf(toDelete, 0);
+    if(index > - 1){
+      this.list.splice(index, 1);
+      this.lists.splice(index, 1);
+    }
+    console.log(this.lists.length);
   }
 
 }

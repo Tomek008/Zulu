@@ -13,8 +13,6 @@ import { BoardComponent } from '../components/board/board.component';
 @Injectable()
 export class ListComponent implements OnInit {
  
-  public static list : ListComponent[] = [];
-  public static ids_list : Number[] = [];
   items: string[] = [];
   public id : Number = 0;
   public profile : BoardComponent;
@@ -22,8 +20,8 @@ export class ListComponent implements OnInit {
   constructor(profile : BoardComponent) {
     this.profile = profile;
     this.id = Math.floor(Math.random() * (10000 - 1)) + 1;
-    ListComponent.ids_list.push(this.id);
-    console.log(this.id);
+    this.profile.list.push(this);
+    console.log(this.id + " ! ");
   }
  
   ngOnInit(): void {
@@ -49,8 +47,7 @@ export class ListComponent implements OnInit {
     newItemForm.reset();
   }
 
-  delete(test:Number){
-    let correct_id = ListComponent.ids_list.indexOf(test);
-    console.log(correct_id);
+  delete(){
+    this.profile.deleteList(this);
   }
 }
