@@ -46,6 +46,9 @@ export class ListComponent implements OnInit {
  
   onSubmit(newItemForm: NgForm) {
     TaskComponent.newString = newItemForm.value.newItem;
+    if(TaskComponent.newString ==""){
+      return;
+    }
     newItemForm.reset();
     this.tasks.push(this.counter);
     this.counter++;
