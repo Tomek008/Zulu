@@ -3,10 +3,10 @@
         <div class="list-name" contenteditable="true">New list</div>
         <div class="button" (click)="delete();">Delete List</div>
     </div>
-    <div class="list" cdkDropList [cdkDropListData]="items" (cdkDropListDropped)="drop($event)">
-        <mat-card class="list-item" *ngFor="let item of items" cdkDrag>
+    <div class="list" cdkDropList [cdkDropListData]="items">
+        <mat-card class="list-item" *ngFor="let item of tasks" cdkDrag>
             <mat-card-content>
-                <p>{{item}}</p>
+                <app-task></app-task>
             </mat-card-content>
         </mat-card>
     </div>

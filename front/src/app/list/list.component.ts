@@ -3,6 +3,7 @@ import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/dr
 import { NgForm } from '@angular/forms';
 import { Board } from '../models/board.model';
 import { BoardComponent } from '../components/board/board.component';
+import { TaskComponent } from '../task/task.component';
  
 @Component({
   selector: 'app-list',
@@ -13,7 +14,9 @@ import { BoardComponent } from '../components/board/board.component';
 @Injectable()
 export class ListComponent implements OnInit {
  
-  items: string[] = [];
+  items: TaskComponent[] = [];
+  tasks: number[] = [];
+  public counter: number = 0;
   public id : Number = 0;
   public profile : BoardComponent;
 
@@ -21,7 +24,6 @@ export class ListComponent implements OnInit {
     this.profile = profile;
     this.id = Math.floor(Math.random() * (10000 - 1)) + 1;
     this.profile.list.push(this);
-    console.log(this.id + " ! ");
   }
  
   ngOnInit(): void {
@@ -43,11 +45,29 @@ export class ListComponent implements OnInit {
   }
  
   onSubmit(newItemForm: NgForm) {
-    this.items.push(newItemForm.value.newItem);
+    TaskComponent.newString = newItemForm.value.newItem;
     newItemForm.reset();
+    this.tasks.push(this.counter);
+    this.counter++;
   }
 
   delete(){
     this.profile.deleteList(this);
+  }
+
+  deleteTaskFromList(text: string){
+    let counter = 0;
+    let idx = -1;
+    this.items.forEach(element => {
+      if(element.text == text){
+        idx = counter;
+      }
+      counter++;
+    });
+
+    if(idx > -1){
+      this.items.splice(idx, 1);
+      this.tasks.splice(idx, 1);
+    }
   }
 }
