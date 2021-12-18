@@ -1,9 +1,10 @@
-import { CanActivate, ExecutionContext, HttpException, HttpStatus, Injectable } from '@nestjs/common';
+import { CanActivate, ExecutionContext, HttpException, HttpStatus, Injectable, Logger } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { Observable } from 'rxjs';
 import * as jwt from 'jsonwebtoken';
 import { SecretConfiguration } from 'src/config/auth.config';
-import e from 'express';
+import e, { request } from 'express';
+import { JwtPayload } from 'jsonwebtoken';
 
 @Injectable()
 export class JwtAuthGuard implements CanActivate{
@@ -32,6 +33,4 @@ async function validateToken(auth: string): Promise<boolean> {
     }catch(error){
         return false
     }
-
 }
-

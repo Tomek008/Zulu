@@ -6,6 +6,9 @@ import { LoginDto } from './login.dto';
 import { UserRepository } from './user.repository';
 import * as jwt from 'jsonwebtoken';
 import { SecretConfiguration } from 'src/config/auth.config';
+import {JwtAuthGuard } from 'src/guard/jwt-auth.guard';
+import { JwtPayload } from 'jsonwebtoken';
+import { getUserIdFromToken } from 'src/shared/utils';
 
 @Injectable()
 export class AuthService {
@@ -45,13 +48,12 @@ export class AuthService {
     if(user.password != data.password){
       throw new HttpException('Password is invalid', HttpStatus.BAD_REQUEST);
     }
-    Logger.log(this.create_token(user))
     const response: any = {"token": this.create_token(user)};
     return response;
   }
 
-  async update(data: ForgotPassword) {
-    const id = data.id
+  async update(data: ForgotPassword, req: any) {
+    let id = await getUserIdFromToken(req)
     let user = await this.userRepository.findOne({ where: { id } });
     if(! user){
       throw new HttpException('There is no user with this id', HttpStatus.NOT_FOUND)
