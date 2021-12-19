@@ -1,0 +1,18 @@
+<div class="container">
+    <div class="text">{{text}}</div>
+    <div class="card-bar">
+        <ng-template #elseBlock><p class="card-name">{{ this.text }}</p></ng-template>
+        <p class="card-name" *ngIf="nameChanged == false">{{ this.text }}</p>
+        <span></span><button mat-raised-button color="primary" class="mat-but" (click)="edit = !edit; newText = this.text">&#9998;</button>
+        <span></span>
+        <div class="card-name-change" [hidden]="!edit">Enter new card name: 
+            <input class="inputArea" type="text" [(ngModel)]="newText"> <span></span>
+        <div class="card-name-change" [hidden]="!edit">Enter description: 
+            <textarea class="inputArea" cols="40" rows="5" [(ngModel)]="newDesc"> </textarea><span></span>
+            <button mat-raised-button color="primary" type="submit" id="bt" (click)="editTask();">
+                Save
+            </button>
+            <button class="deleteButton" mat-raised-button color="primary" id="delete" (click)="deleteTask();">Delete task</button>
+      </div>
+      <span></span>
+</div>

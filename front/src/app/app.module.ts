@@ -19,6 +19,7 @@ import { DragDropModule} from '@angular/cdk/drag-drop';
 import { OverviewComponent } from './overview/overview.component';
 import { ListComponent } from './list/list.component';
 import { MatCardModule } from '@angular/material/card';
+import { TaskComponent } from './task/task.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { MatCardModule } from '@angular/material/card';
     RegisterComponent,
     BoardComponent,
     OverviewComponent,
-    ListComponent
+    ListComponent,
+    TaskComponent
   ],
   imports: [
     BrowserModule,
