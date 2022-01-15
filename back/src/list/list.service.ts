@@ -5,18 +5,24 @@ import { ListRepository } from './list.repository';
 import { List } from './list.entity';
 import { UserRepository } from 'src/auth/user.repository';
 import { ensureOwnership, getUserIdFromToken } from 'src/shared/utils';
+import { CardRepository } from 'src/card/card.repository';
+import { Console } from 'console';
+import { Card } from 'src/card/card.entity';
 @Injectable()
 export class ListService {
+
     constructor(private listRepository: ListRepository,
         private boardRepository: BoardRepository,
-        private userRepository: UserRepository){}
+        private userRepository: UserRepository,
+        private cardRepository: CardRepository){}
     
     get_response(list: List){
         const response: any = {
             "id": list.id,
             "name": list.name,
             "author_id": list.author.id,
-            "board_id": list.board.id
+            "board_id": list.board.id,
+            "cards": list.cards
         }
         return response
     }
@@ -33,7 +39,7 @@ export class ListService {
         let userId = await getUserIdFromToken(req)
         const list = await this.listRepository.findOne({
             where:{ id },
-            relations: ['author', 'board']
+            relations: ['author', 'board', 'cards']
         });
         if(! ensureOwnership(userId, list.author.id)){
             return new HttpException('You dont have permission to this list', HttpStatus.FORBIDDEN);
@@ -50,7 +56,7 @@ export class ListService {
     async update(id: any, body: ListDto) {
         let list = await this.listRepository.findOne({
             where: {id},
-            relations: ['board', 'author']
+            relations: ['board', 'author', 'cards']
         })
         if( !list){
             throw new HttpException('List not found', HttpStatus.NOT_FOUND);
@@ -58,7 +64,7 @@ export class ListService {
         await this.listRepository.update({ id }, body)
         list = await this.listRepository.findOne({
             where: {id},
-            relations: ['board', 'author']
+            relations: ['board', 'author', 'cards']
         })
 
         const response: any = this.get_response(list)
@@ -81,7 +87,7 @@ export class ListService {
         const list = await this.listRepository.create({
             ...body,
             board,
-            author: author
+            author: author, 
         });
         await this.listRepository.save(list);
         const response: any = this.get_response(list)
@@ -93,8 +99,9 @@ export class ListService {
         const id = listId.id
         const list = await this.listRepository.findOne({
             where: {id},
-            relations: ['board', 'author']
+            relations: ['board', 'author', 'cards']
         });
+        Logger.log(list.cards)
         if(!list){
             throw new HttpException('List not found', HttpStatus.NOT_FOUND)
         }
@@ -105,10 +112,48 @@ export class ListService {
     async getListsByBoardId(boardId: number) {
         const lists = await this.listRepository.find({
             where: {board: {id: boardId}},
-            relations: ['board', 'author']
+            relations: ['board', 'author', 'cards']
         });
         
         const response: any = this.get_all_response(lists)
         return response;
     }
+
+    async move(id: any, index: number, cardId: number) {
+        let list = await this.listRepository.findOne({
+            where: {id},
+            relations: ['board', 'author', 'cards']
+        });
+        if(!list ){
+            throw new HttpException('List not found', HttpStatus.NOT_FOUND)
+
+        }
+        const card = await this.cardRepository.findOne({
+            where: {id: cardId},
+            relations: ['list']
+        })
+        if(!card ){
+            throw new HttpException('Card not found', HttpStatus.NOT_FOUND)
+        }
+
+        const newCards = this.insert(list.cards, index, cardId)
+        // await this.listRepository.update({ id }, {cards: newCards})
+        const response = this.get_response(list)
+        return response
+    }
+    async insert(array: Card[], newIndex: number, item: any){
+        array = array.filter(element => element.id != item);
+        const card = await this.cardRepository.findOne({
+            where: {id: item},
+            relations: ['list']
+        })
+
+        array.splice(newIndex, 0, card)
+        array.forEach(element =>{
+            Logger.log(element.id)
+            this.cardRepository.update({id: element.id}, {} )
+        })
+        return array
+    }
+    
 }

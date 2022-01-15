@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Logger, Param, Post, Put, Req, UseGuards } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Logger, Param, Post, Put, Query, Req, UseGuards } from '@nestjs/common';
 import { JwtAuthGuard } from 'src/guard/jwt-auth.guard';
 import { ListDto } from './list.dto';
 import { ListService } from './list.service';
@@ -28,6 +28,12 @@ export class ListController {
     @Put(':id')
     async update(@Param('id') id, @Body() body: ListDto){
         return this.listService.update(id, body)
+    }
+    
+    @UseGuards(new JwtAuthGuard)
+    @Put('move/:id')
+    async move(@Param('id') listId, @Query('index') index: number, @Query('cardId') cardId: number){
+        return this.listService.move(listId, index, cardId)
     }
 
     @UseGuards(new JwtAuthGuard)

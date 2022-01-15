@@ -7,9 +7,10 @@ import { typeOrmConfig } from './config/typeorm.config';
 import { UsersModule } from './users/users.module';
 import { BoardModule } from './board/board.module';
 import { ListModule } from './list/list.module';
+import { CardModule } from './card/card.module';
 
 @Module({
-  imports: [HttpModule, AuthModule, UsersModule, TypeOrmModule.forRoot(typeOrmConfig), BoardModule, ListModule ],
+  imports: [HttpModule, AuthModule, UsersModule, TypeOrmModule.forRoot(typeOrmConfig), BoardModule, ListModule, CardModule ],
   controllers: [AppController],
   providers: [AppService],
 })
