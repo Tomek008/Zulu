@@ -1,5 +1,6 @@
 import { List } from "src/list/list.entity";
-import { Column, CreateDateColumn, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Comment } from "src/comment/comment.entity";
+import { Column, CreateDateColumn, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity('card')
 export class Card{
@@ -15,8 +16,13 @@ export class Card{
     @CreateDateColumn()
     createdAt: Date;
 
+    @Column({nullable: true})
+    posittionOnList: number
+
     @ManyToOne(type => List, list => list.cards, {onDelete: 'CASCADE'})
     list: List
 
+    @OneToMany(type => Comment, comment => comment.card)
+    comments: Comment[]
 
 }

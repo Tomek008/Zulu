@@ -12,7 +12,7 @@ export class CardService {
     async get(cardId: number){
         const card = await this.cardRepository.findOne({
             where: {id: cardId},
-            relations: ['list']
+            relations: ['list', 'comments']
         })
         if(! card){
             throw new HttpException("Card not found", HttpStatus.NOT_FOUND)
@@ -30,9 +30,11 @@ export class CardService {
         if(! list){
             throw new HttpException("List not found", HttpStatus.NOT_FOUND)
         }
+        let posittionOnList = list.cards.length
         const card = await this.cardRepository.create({
             ...body, 
-            list: list
+            list: list,
+            posittionOnList: posittionOnList
         })
         await this.cardRepository.save(card);
         const response: any = this.get_response(card)
@@ -42,7 +44,7 @@ export class CardService {
     async setDescription(id: number, body: CardDescription){
         const card = await this.cardRepository.findOne({
             where: {id: id},
-            relations: ['list']
+            relations: ['list', 'comments']
         })
         if(!card){
             throw new HttpException("Card not found", HttpStatus.NOT_FOUND)
@@ -57,7 +59,7 @@ export class CardService {
     async delete(id: number){
         const card = await this.cardRepository.findOne({
             where: {id: id},
-            relations: ['list']
+            relations: ['list', 'comments']
         })
 
         if(!card){
@@ -75,7 +77,9 @@ export class CardService {
             "createdAt": card.createdAt,
             "name": card.name,
             "description": card.description,
-            "list_id": card.list.id
+            "position": card.posittionOnList,
+            "list_id": card.list.id,
+            "comments": card.comments
         }
         return response
     }

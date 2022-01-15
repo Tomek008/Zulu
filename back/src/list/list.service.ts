@@ -101,7 +101,6 @@ export class ListService {
             where: {id},
             relations: ['board', 'author', 'cards']
         });
-        Logger.log(list.cards)
         if(!list){
             throw new HttpException('List not found', HttpStatus.NOT_FOUND)
         }
@@ -120,6 +119,7 @@ export class ListService {
     }
 
     async move(id: any, index: number, cardId: number) {
+        Logger.log("tylko ja i moj sklad")
         let list = await this.listRepository.findOne({
             where: {id},
             relations: ['board', 'author', 'cards']
@@ -135,25 +135,28 @@ export class ListService {
         if(!card ){
             throw new HttpException('Card not found', HttpStatus.NOT_FOUND)
         }
-
-        const newCards = this.insert(list.cards, index, cardId)
-        // await this.listRepository.update({ id }, {cards: newCards})
+        list = await this.listRepository.findOne({
+            where: {id},
+            relations: ['board', 'author', 'cards']
+        });
         const response = this.get_response(list)
         return response
     }
     async insert(array: Card[], newIndex: number, item: any){
         array = array.filter(element => element.id != item);
+        Logger.log(array.length)
         const card = await this.cardRepository.findOne({
             where: {id: item},
             relations: ['list']
         })
 
         array.splice(newIndex, 0, card)
-        array.forEach(element =>{
+        array.forEach((element, index) =>{
+            Logger.log(element.posittionOnList)
             Logger.log(element.id)
-            this.cardRepository.update({id: element.id}, {} )
+            this.cardRepository.update({id: element.id}, {posittionOnList: index} )
         })
-        return array
+       
     }
     
 }
