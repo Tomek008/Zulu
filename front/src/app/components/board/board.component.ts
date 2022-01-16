@@ -42,7 +42,8 @@ export class BoardComponent implements OnInit {
   ngOnInit() {
   }
 
-  drop(event: CdkDragDrop<string[]>) {
+  drop(event: CdkDragDrop<any>) {
+    console.log("DROPPED BOARD");
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
     } else {
