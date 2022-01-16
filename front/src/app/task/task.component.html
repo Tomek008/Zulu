@@ -9,6 +9,14 @@
             <input class="inputArea" type="text" [(ngModel)]="newText"> <span></span>
         <div class="card-name-change" [hidden]="!edit">Enter description: 
             <textarea class="inputArea" cols="40" rows="5" [(ngModel)]="newDesc"> </textarea><span></span>
+            <mat-form-field appearance="fill">
+                <mat-label>Choose a date</mat-label>
+              <!-- #docregion toggle -->
+                <input matInput [matDatepicker]="picker">
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+              <!-- #enddocregion toggle -->
+              </mat-form-field>
             <button mat-raised-button color="primary" type="submit" id="bt" (click)="editTask();">
                 Save
             </button>
