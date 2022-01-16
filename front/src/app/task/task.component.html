@@ -1,5 +1,17 @@
 <div class="container">
+    <div class="etykieta" style="color: #50d0fb">
+    <mat-form-field appearance="fill">
+        <mat-label>Label</mat-label>
+        <select matNativeControl>
+          <option style="width:2000px; background-color: rgb(25, 155, 35); font-size: 13px;" value="volvo">FINISHED</option>
+          <option style="width:2000px; background-color: rgb(214, 139, 0); font-size: 13px;" value="saab">WORK IN PROGRESS</option>
+          <option style="width:2000px; background-color: rgb(81, 7, 255); font-size: 13px;" value="mercedes">To Do</option>
+        </select>
+      </mat-form-field>
+      
+      </div>
     <div class="text">{{text}}</div>
+    
     <div class="card-bar">
         <ng-template #elseBlock><p class="card-name">{{ this.text }}</p></ng-template>
         <p class="card-name" *ngIf="nameChanged == false">{{ this.text }}</p>
@@ -17,6 +29,7 @@
                 <mat-datepicker #picker></mat-datepicker>
               <!-- #enddocregion toggle -->
               </mat-form-field>
+              
             <button mat-raised-button color="primary" type="submit" id="bt" (click)="editTask();">
                 Save
             </button>
