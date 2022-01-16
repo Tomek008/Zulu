@@ -37,7 +37,7 @@ export class AuthService {
     const login = data.login;
     let user = await this.userRepository.findOne({ where: { login } });
     if (! user) {
-      throw new HttpException('User not exists', HttpStatus.BAD_REQUEST);
+      throw new HttpException('User does not exist in the database', HttpStatus.BAD_REQUEST);
     }
 
     if(user.password != data.password){
