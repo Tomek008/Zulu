@@ -1,6 +1,7 @@
 import { List } from "src/list/list.entity";
 import { Comment } from "src/comment/comment.entity";
 import { Column, CreateDateColumn, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { TaskList } from "src/tasklist/tasklist.entity";
 
 @Entity('card')
 export class Card{
@@ -24,5 +25,8 @@ export class Card{
 
     @OneToMany(type => Comment, comment => comment.card)
     comments: Comment[]
+
+    @OneToMany(type => TaskList, tasklist => tasklist.card)
+    taskLists: TaskList[] 
 
 }
