@@ -1,7 +1,10 @@
-import { Body, Controller, Get, Post, Put } from '@nestjs/common';
+import { Body, Controller, Get, Logger, Post, Put, Req, UseGuards } from '@nestjs/common';
 import { LoginDto } from './login.dto';
 import { ForgotPassword, UserDto } from './user.dto';
 import { AuthService } from './auth.service';
+import { Request } from 'express';
+import { JwtAuthGuard } from 'src/guard/jwt-auth.guard';
+import { AuthGuard } from '@nestjs/passport';
 
 @Controller('api/auth')
 export class AuthController {
@@ -16,9 +19,9 @@ export class AuthController {
     login(@Body() body: LoginDto){
         return this.authService.login(body);
     }
-
+    @UseGuards(new JwtAuthGuard())
     @Put("/update")
-    update(@Body() body: ForgotPassword){
-        return this.authService.update(body);
+    update(@Req() request: Request, @Body() body: ForgotPassword){
+        return this.authService.update(body, request.headers.authorization);
     }
 }

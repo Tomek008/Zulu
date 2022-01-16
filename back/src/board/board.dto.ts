@@ -7,6 +7,5 @@ export class BoardDto{
 export class BoardRo{
     id: number;
     name: string;
-    author: UserDto;
     list: List
 }
