@@ -20,7 +20,8 @@ import { OverviewComponent } from './overview/overview.component';
 import { ListComponent } from './list/list.component';
 import { MatCardModule } from '@angular/material/card';
 import { TaskComponent } from './task/task.component';
-
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MatNativeDateModule} from '@angular/material/core';
 @NgModule({
   declarations: [
     AppComponent,
@@ -43,7 +44,9 @@ import { TaskComponent } from './task/task.component';
     MatInputModule,
     MatButtonModule,
     BrowserAnimationsModule,
-    MatCardModule
+    MatCardModule,
+    MatDatepickerModule,
+    MatNativeDateModule
   ],
   providers: [ 
     HttpClientModule

@@ -2,7 +2,7 @@ import { Board } from 'src/app/models/board.model';
 import { Column } from './column.model';
 
 export const BOARDNAMES: Board[] = [
-  { name: 'Pierwsza', columns: [
+  { name: 'Board 1', columns: [
     new Column('To Do', [
       "Pierwsza-test",
     ]),
@@ -12,7 +12,7 @@ export const BOARDNAMES: Board[] = [
     new Column('Done', [
     ])
   ]},
-  { name: 'Druga', columns: [
+  { name: 'Board 2', columns: [
     new Column('To Do', [
       "Druga-test",
     ]),
@@ -22,7 +22,7 @@ export const BOARDNAMES: Board[] = [
     new Column('Done', [
     ])
   ]  },
-  { name: 'Trzecia', columns: [
+  { name: 'Board 3', columns: [
     new Column('To Do', [
       "Trzecia-test",
     ]),
@@ -32,7 +32,7 @@ export const BOARDNAMES: Board[] = [
     new Column('Done', [
     ])
   ] },
-  { name: 'Czwarta', columns: [
+  { name: 'Board 4', columns: [
     new Column('To Do', [
       "Czwarta-test"
     ]),
@@ -42,7 +42,7 @@ export const BOARDNAMES: Board[] = [
     new Column('Done', [
     ])
   ] },
-  { name: 'Piąta', columns: [
+  { name: 'Board 5', columns: [
     new Column('To Do', [
       "Piąta-test"
     ]),

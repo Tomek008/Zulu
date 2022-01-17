@@ -18,7 +18,8 @@ export class RegisterComponent implements OnInit {
       this.registerForm = this.formBuilder.group({
         username: [null, [Validators.required, Validators.minLength(3)]],
         password: [null, [Validators.required, Validators.minLength(3)]],
-        passwordConfirm: [null, [Validators.required]]
+        passwordConfirm: [null, [Validators.required]],
+        email: [null, [Validators.required, Validators.minLength(3)]],
       })
   }
 
@@ -31,6 +32,10 @@ export class RegisterComponent implements OnInit {
     {
       return;
     }
+    
+    this.authService.register(this.registerForm.value).pipe(
+      map(token => this.router.navigate(['login']))).subscribe();
+      console.log(this.registerForm.value);
   }
 
 }
