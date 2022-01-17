@@ -1,10 +1,11 @@
 <div class="all-list">
-    
-    <div class="list" cdkDropList [cdkDropListData]="items" style="margin-left: 10px; margin-top: 10px;">
-        <div class="container">
-            <div class="list-name" style="float:left; margin-left: 20px; font-weight: bold" contenteditable="true">New list</div>
-            <div class="button" style="float:left; margin-left: 100px; font-weight:bolder" (click)="delete();">Delete</div>
-        </div>
+
+    <div class="list" cdkDropList [cdkDropListData] ="tasks" (cdkDropListDropped)="drop($event)" style="margin-left: 10px; margin-top: 10px;" >            
+    <div class="container">
+        <div class="list-name" style="float:left; margin-left: 20px; font-weight: bold" contenteditable="true">New list</div>
+        <div class="button" style="float:left; margin-left: 100px; font-weight:bolder" (click)="delete();">Delete</div>
+    </div>
+      
         <mat-card class="list-item" *ngFor="let item of tasks" cdkDrag>
             <mat-card-content>
                 <app-task></app-task>

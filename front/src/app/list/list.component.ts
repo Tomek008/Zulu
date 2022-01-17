@@ -29,7 +29,8 @@ export class ListComponent implements OnInit {
   ngOnInit(): void {
   }
  
-  drop(event: CdkDragDrop<string[]>) {
+  drop(event: CdkDragDrop<any>) {
+    console.log("DROPPED");
     if (event.previousContainer === event.container) {
       moveItemInArray(
         event.container.data,
@@ -42,6 +43,8 @@ export class ListComponent implements OnInit {
         event.previousIndex,
         event.currentIndex);
     }
+    
+    console.log(event.container.data);
   }
  
   onSubmit(newItemForm: NgForm) {
