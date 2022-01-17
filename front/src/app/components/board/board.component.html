@@ -2,9 +2,9 @@
   
   <div class="board">
     <div class="board-bar" >
-      <p class="board-name" *ngIf="nameChanged == true; else elseBlock">{{ namess }}</p>
+      <p class="board-name" style="color:rgb(238, 39, 39); font-style: italic;" *ngIf="nameChanged == true; else elseBlock">{{ namess }}</p>
       <ng-template #elseBlock><p class="board-name" style="color:rgb(238, 39, 39); font-style: italic;">{{ board.name }}</p></ng-template>
-      <p class="board-name" *ngIf="nameChanged == false">{{ board.name }}</p>
+      <p class="board-name" style="color:rgb(238, 39, 39); font-style: italic;" *ngIf="nameChanged == false">{{ board.name }}</p>
       <span></span><button mat-raised-button color="primary" class="mat-but" (click)="edit = !edit; str = board.name">&#9998;</button>
       <span></span>
       <div class="board-name-change" [hidden]="!edit">
