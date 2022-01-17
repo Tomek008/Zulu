@@ -1,5 +1,5 @@
 <div>
-<h1>Available Boards</h1>
+<h1 st>Available Boards</h1>
 <nav>
   <ul>
         <li *ngFor="let boardname of boardnames, let i = index, let last = last">
@@ -7,9 +7,11 @@
             <button mat-raised-button color="primary" [routerLink]="'/board'">{{boardname.name}}</button><span></span>
             <br>
             <br *ngIf="last">
-            <button *ngIf="last" mat-raised-button color="warn" type="submit" (click)="addNewBoard()">
+            <!-- 
+              <button *ngIf="last" mat-raised-button color="warn" type="submit" (click)="addNewBoard()">
               Add New Board
-          </button>
+          </button> 
+        -->
         </li>
         
   </ul>

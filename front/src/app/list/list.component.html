@@ -1,19 +1,22 @@
 <div class="all-list">
-    <div class="container">
-        <div class="list-name" contenteditable="true">New list</div>
-        <div class="button" (click)="delete();">Delete List</div>
-    </div>
-    <div class="list" cdkDropList [cdkDropListData]="items">
+    
+    <div class="list" cdkDropList [cdkDropListData]="items" style="margin-left: 10px; margin-top: 10px;">
+        <div class="container">
+            <div class="list-name" style="float:left; margin-left: 20px; font-weight: bold" contenteditable="true">New list</div>
+            <div class="button" style="float:left; margin-left: 100px; font-weight:bolder" (click)="delete();">Delete</div>
+        </div>
         <mat-card class="list-item" *ngFor="let item of tasks" cdkDrag>
             <mat-card-content>
                 <app-task></app-task>
             </mat-card-content>
         </mat-card>
     </div>
-    <form #newItemForm="ngForm" (ngSubmit)="onSubmit(newItemForm)">
+    
+    <form #newItemForm="ngForm" style="margin-left: 15px;" (ngSubmit)="onSubmit(newItemForm)">
         <mat-form-field>
             <input matInput name="newItem" ngModel type="text" placeholder="Enter a new item">
         </mat-form-field>
-        <button mat-raised-button color="primary">Add Item</button>
+        <button mat-raised-button style="margin-left: 10px;" color="primary">Add Item</button>
     </form>
+
 </div>
