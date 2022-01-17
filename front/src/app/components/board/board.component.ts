@@ -19,7 +19,7 @@ export class BoardComponent implements OnInit {
   public nameChanged:any;
   edit = false;
 
-  board: Board = new Board('Nazwa Tablicy', [
+  board: Board = new Board('Board Name', [
     new Column('To Do', [
       "Wyświetlanie tablic",
       "Dodanie nowej tablicy",
